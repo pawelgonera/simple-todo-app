@@ -10,4 +10,19 @@ In this application you can create new task with title, short description, and a
 for specific registered account who is currently log in app. Each task can be modify and removed. List of the task can be sorted and filtered
 by title, date and also finished or unfinished tasks.
 
+### Technology
+Application has been developed as web service using Spring Boot with Spring MVC, Spring Security and Spring Data JPA.
+
+#### Tools
+* Java 8
+* Spring Boot
+* Maven
+* Thymeleaf
+* MySQL
+* Apache Tomcat
+* Bootstrap
+* Jenkins
+
+#### Deployment
+Application has been deployed on VPS using Continuous Integration with Jenkins on this [URL](http://54.37.139.130:8080/SimpleToDoApp/).
 
