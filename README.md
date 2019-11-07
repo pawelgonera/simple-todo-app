@@ -23,6 +23,9 @@ Application has been developed as web service using Spring Boot with Spring MVC,
 * Bootstrap
 * Jenkins
 
-#### Deployment
+### Deployment
 Application has been deployed on VPS using Continuous Integration with Jenkins on this [URL](http://54.37.139.130:8080/SimpleToDoApp/).
+
+### Author
+[Paweł Gónera](https://www.linkedin.com/in/pawe%C5%82-g%C3%B3nera-87055aa2/)
 
