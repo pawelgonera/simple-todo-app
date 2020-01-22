@@ -20,20 +20,24 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService
 {
     private static final String DEFAULT_ROLE = "ROLE_USER";
+    @Autowired
     private UserRepository userRepo;
+    @Autowired
     private TaskRepository taskRepo;
+    @Autowired
     private UserRoleRepository userRoleRepo;
+    @Autowired
     private PasswordEncoder passwordEncoder;
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
-    @Autowired
+    /*@Autowired
     public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepo, TaskRepository taskRepo, UserRoleRepository userRoleRepo)
     {
         this.passwordEncoder = passwordEncoder;
         this.userRepo = userRepo;
         this.taskRepo = taskRepo;
         this.userRoleRepo = userRoleRepo;
-    }
+    }*/
 
     @Override
     public void createUser(User user) throws Exception
@@ -126,7 +130,7 @@ public class UserServiceImpl implements UserService
 
         try {
             logger.debug("Pomyślnie udało się pobrać użytkownika {} z bazy", username);
-            user = Optional.ofNullable(userRepo.findUserByUsername(username));//userDao.read(username));
+            user = userRepo.findUserByUsername(username);
 
         } catch (NotFoundDesiredDataRuntimeException e) {
             e.printStackTrace();

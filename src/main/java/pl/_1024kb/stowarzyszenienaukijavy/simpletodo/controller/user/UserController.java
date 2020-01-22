@@ -25,26 +25,27 @@ import java.io.IOException;
 @Controller
 public class UserController
 {
+    @Autowired
     private UserServiceImpl userService;
+    @Autowired
     private TaskServiceImpl taskService;
+    @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
     private UserRepository userRepo;
+    @Autowired
     private MailSender mailSender;
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
-    public UserController(UserServiceImpl userService, TaskServiceImpl taskService, PasswordEncoder passwordEncoder, MailSender mailSender)
+    /*@Autowired
+    public UserController(UserServiceImpl userService, UserRepository userRepo, TaskServiceImpl taskService, PasswordEncoder passwordEncoder, MailSender mailSender)
     {
         this.userService = userService;
         this.taskService = taskService;
         this.passwordEncoder = passwordEncoder;
         this.mailSender = mailSender;
-    }
-
-    @Autowired
-    public void setUserRepository(UserRepository userRepo) {
         this.userRepo = userRepo;
-    }
+    }*/
 
     @GetMapping("/register")
     public String redirectToRegister(Model model)

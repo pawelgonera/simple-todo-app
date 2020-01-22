@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import pl._1024kb.stowarzyszenienaukijavy.simpletodo.exception.NotFoundDesiredDataRuntimeException;
 import pl._1024kb.stowarzyszenienaukijavy.simpletodo.model.User;
 import pl._1024kb.stowarzyszenienaukijavy.simpletodo.model.UserRole;
 import pl._1024kb.stowarzyszenienaukijavy.simpletodo.repository.UserRepository;
@@ -28,11 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
-        User user = userRepository.findUserByUsername(username);
-        if(user == null)
-        {
-            throw new UsernameNotFoundException("User not found");
-        }
+        User user = userRepository.findUserByUsername(username).orElseThrow(NotFoundDesiredDataRuntimeException::newRunTimeException);
 
         return new org.springframework.security.core.userdetails.User(
                                     user.getUsername(),

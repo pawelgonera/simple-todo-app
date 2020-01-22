@@ -26,9 +26,9 @@ CREATE TABLE `tasks`
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 );
 
-DROP TABLE IF EXISTS `user_role`;
+DROP TABLE IF EXISTS `roles`;
 
-CREATE TABLE `user_role`
+CREATE TABLE `roles`
 (
   `role_id`     INT(11)      NOT NULL AUTO_INCREMENT,
   `role`       VARCHAR(15)  NOT NULL,

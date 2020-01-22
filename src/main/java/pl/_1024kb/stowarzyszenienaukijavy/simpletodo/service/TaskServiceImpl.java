@@ -20,16 +20,18 @@ import java.util.stream.Collectors;
 @Service
 public class TaskServiceImpl implements TaskService
 {
-    private TaskRepository taskRepo;
+    @Autowired
+    private TaskRepository taskRepository;
+    @Autowired
     private UserServiceImpl userService;
     private static final Logger logger = LoggerFactory.getLogger(TaskServiceImpl.class);
 
-    @Autowired
+    /*@Autowired
     public TaskServiceImpl(UserServiceImpl userService, TaskRepository taskRepo)
     {
         this.userService = userService;
         this.taskRepo = taskRepo;
-    }
+    }*/
 
     @Override
     public void createTask(Task task, String username) throws Exception {
@@ -43,7 +45,7 @@ public class TaskServiceImpl implements TaskService
         }
 
         try {
-            taskRepo.save(task);
+            taskRepository.save(task);
             logger.debug(messageInfo + " - " + task.getTitle());
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,7 +65,7 @@ public class TaskServiceImpl implements TaskService
         }
 
         try {
-            return taskRepo.findAllByUser(user.orElseThrow(NotFoundDesiredDataRuntimeException::newRunTimeException));
+            return taskRepository.findAllByUser(user.orElseThrow(NotFoundDesiredDataRuntimeException::newRunTimeException));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,7 +94,7 @@ public class TaskServiceImpl implements TaskService
             taskToUpdate.setDate(task.getDate());
             taskToUpdate.setDescription(task.getDescription());
             taskToUpdate.setTaskDone(task.getTaskDone());
-            taskRepo.save(task);
+            taskRepository.save(task);
             logger.debug(messageInfo + " - " + task.getTitle());
         } catch (Exception e) {
             e.printStackTrace();
@@ -106,7 +108,7 @@ public class TaskServiceImpl implements TaskService
     public void deleteTaskById(Long taskId) throws Exception {
         String messageInfo = "Task was successfully deleted";
         try {
-            taskRepo.deleteById(taskId);
+            taskRepository.deleteById(taskId);
             logger.debug(messageInfo + " - id: " + taskId);
 
         } catch (Exception e) {
@@ -122,7 +124,7 @@ public class TaskServiceImpl implements TaskService
         User user = userService.getUserByUsername(username).orElseThrow(NotFoundDesiredDataRuntimeException::newRunTimeException);
 
         try {
-            taskRepo.deleteAllByUser(user);
+            taskRepository.deleteAllByUser(user);
             logger.debug("Usunięto wszystkie zadania użytkownika {}", username);
         } catch (Exception e) {
             e.printStackTrace();

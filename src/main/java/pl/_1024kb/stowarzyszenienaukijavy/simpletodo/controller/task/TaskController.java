@@ -22,20 +22,21 @@ import java.util.List;
 @Controller
 public class TaskController
 {
-    private TaskServiceImpl taskService;
-    private List<Task> taskList;
-
     @Autowired
+    private TaskServiceImpl taskServiceImpl;
+    private List<Task> taskList = Collections.synchronizedList(new LinkedList<>());
+
+    /*@Autowired
     public TaskController(TaskServiceImpl taskService)
     {
         this.taskService = taskService;
         this.taskList = Collections.synchronizedList(new LinkedList<>());
-    }
+    }*/
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Task>> allTask(@SessionAttribute String username)
     {
-        List<Task> allTask = taskService.getAllTasksByUsername(username);
+        List<Task> allTask = taskServiceImpl.getAllTasksByUsername(username);
         return ResponseEntity.ok(allTask);
     }
 
@@ -58,7 +59,7 @@ public class TaskController
         {
             try
             {
-                taskService.createTask(task, username);
+                taskServiceImpl.createTask(task, username);
 
             } catch (Exception e)
             {
@@ -77,7 +78,7 @@ public class TaskController
     {
         try
         {
-            taskService.deleteTaskById(id);
+            taskServiceImpl.deleteTaskById(id);
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -90,7 +91,7 @@ public class TaskController
     public String redirectToEditTask(Model model, @RequestParam String id, @RequestParam String title,
                            @RequestParam String date, @RequestParam String description, @RequestParam String taskDone, @SessionAttribute String username)
     {
-        Task task = taskService.getTaskById(username, Long.valueOf(id));
+        Task task = taskServiceImpl.getTaskById(username, Long.valueOf(id));
         task.setTitle(title);
         task.setDate(LocalDate.parse(date));
         task.setDescription(description);
@@ -113,7 +114,7 @@ public class TaskController
         {
             try
             {
-                taskService.changeTask(task, username);
+                taskServiceImpl.changeTask(task, username);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -129,7 +130,7 @@ public class TaskController
    @GetMapping("/tasks")
     public String redirectToTasks(Model model, @SessionAttribute String username)
     {
-        taskList = taskService.getAllTasksByUsername(username);
+        taskList = taskServiceImpl.getAllTasksByUsername(username);
 
         model.addAttribute("tasksList", taskList);
 
@@ -157,16 +158,16 @@ public class TaskController
             {
                 case DATE:
                     LocalDate date = LocalDate.parse(request.getParameter("dateFilter"));
-                    taskList = taskService.getAllTasksByDate(username, date);
+                    taskList = taskServiceImpl.getAllTasksByDate(username, date);
                     break;
                 case TRUE:
-                    taskList = taskService.getAllTasksByTaskDone(username, true);
+                    taskList = taskServiceImpl.getAllTasksByTaskDone(username, true);
                     break;
                 case FALSE:
-                    taskList = taskService.getAllTasksByTaskDone(username, false);
+                    taskList = taskServiceImpl.getAllTasksByTaskDone(username, false);
                     break;
                 default:
-                    taskList = taskService.getAllTasksByUsername(username);
+                    taskList = taskServiceImpl.getAllTasksByUsername(username);
                     break;
             }
 
@@ -179,16 +180,16 @@ public class TaskController
             OrderOption orderOption = OrderOption.valueOf(sortList.toUpperCase());
             switch (orderOption) {
                 case TITLE:
-                    taskList = taskService.getAllTasksOrderedByTitle(username);
+                    taskList = taskServiceImpl.getAllTasksOrderedByTitle(username);
                     break;
                 case DATE:
-                    taskList = taskService.getAllTasksOrderedByDate(username);
+                    taskList = taskServiceImpl.getAllTasksOrderedByDate(username);
                     break;
                 case STATUS:
-                    taskList = taskService.getAllTasksOrderedByStatus(username);
+                    taskList = taskServiceImpl.getAllTasksOrderedByStatus(username);
                     break;
                 default:
-                    taskList = taskService.getAllTasksByUsername(username);
+                    taskList = taskServiceImpl.getAllTasksByUsername(username);
                     break;
             }
         }
