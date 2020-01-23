@@ -64,7 +64,7 @@ And run server - go to directory where tomcat is installed
 cd [tomcat-home-directory]/bin/startup
 ```
 
-Then deploy war file on tomcat using maven
+Back to main directory of the project and deploy war file on tomcat using maven
 ```
 mvn tomcat7:deploy
 ```
