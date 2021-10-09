@@ -25,7 +25,7 @@ import static org.mockito.Mockito.doReturn;
 public class UserServiceImplTest
 {
     private static final User VALID_USER = User.builder().username("Poul").password("password").email("poul@g.com").build();
-    //private static final User NOT_VALID_USER = new User(1L, "P", "mail.com", "pass", "pase");
+    private static final User NOT_VALID_USER = new User(1L, "P", "mail.com", "pass", "pase");
 
     @Autowired
     private UserService userService;
@@ -41,7 +41,7 @@ public class UserServiceImplTest
     public void shouldReturnUserByUsername()
     {
         //given
-        Optional<User> userOptional = Optional.of(VALID_USER);
+        Optional<User> userOptional = Optional.of(NOT_VALID_USER);
         doReturn(userOptional).when(userRepository).findUserByUsername(VALID_USER.getUsername());
 
         //when
