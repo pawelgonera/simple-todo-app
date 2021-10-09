@@ -41,14 +41,15 @@ public class UserServiceImplTest
     public void shouldReturnUserByUsername()
     {
         //given
-        Optional<User> userOptional = Optional.of(NOT_VALID_USER);
+        Optional<User> userOptional = Optional.of(VALID_USER);
         doReturn(userOptional).when(userRepository).findUserByUsername(VALID_USER.getUsername());
 
         //when
         final Optional<User> userFound = userService.getUserByUsername(VALID_USER.getUsername());
 
         //then
-        assertEquals(userOptional, userFound);
+        Optional<User> expected = Optional.of(NOT_VALID_USER);
+        assertEquals(expected, userFound);
 
     }
 }
