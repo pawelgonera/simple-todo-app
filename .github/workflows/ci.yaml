@@ -25,8 +25,8 @@ jobs:
     - name: Build Tests with Maven
       run: mvn --batch-mode --update-snapshots verify
     - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
+      run: |
+        ls ${{ github.workspace }}
     - name: Publish Unit Test Results
       if: always()
       uses: EnricoMi/publish-unit-test-result-action@v1.23
