@@ -28,4 +28,4 @@ jobs:
       if: always()
       uses: EnricoMi/publish-unit-test-result-action@v1.23
       with:
-        files: surfire-reports/TEST-*.xml
+        files: surefire-reports/TEST-*.xml
