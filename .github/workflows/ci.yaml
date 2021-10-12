@@ -31,4 +31,4 @@ jobs:
       if: always()
       uses: EnricoMi/publish-unit-test-result-action@v1.23
       with:
-        files: surefire-reports/TEST-*.xml
+        files: /home/runner/work/simple-todo-app/simple-todo-app/target/surefire-reports/TEST-*.xml
