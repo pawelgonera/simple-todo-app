@@ -48,8 +48,9 @@ public class UserServiceImplTest
         final Optional<User> userFound = userService.getUserByUsername(VALID_USER.getUsername());
 
         //then
-        Optional<User> expected = Optional.of(NOT_VALID_USER);
+        Optional<User> expected = Optional.of(VALID_USER);
         assertEquals(expected, userFound);
-
     }
+
+
 }

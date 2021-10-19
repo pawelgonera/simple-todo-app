@@ -57,7 +57,8 @@ public class UserServiceImpl implements UserService
             user.getRoles().add(userRole);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepo.save(user);
-            userRoleRepo.delete(userRole);
+            if(userRole != null)
+                userRoleRepo.delete(userRole);
             logger.debug(messageInfo + " - " + user.getUsername());
 
         } catch (Exception e) {

@@ -15,8 +15,8 @@ public class SimpletodoAppApplication
         SpringApplication.run(SimpletodoAppApplication.class, args);
     }
 
-    @Bean
-    public Validator validator() {
-        return new LocalValidatorFactoryBean();
-    }
+//    @Bean
+//    public Validator validator() {
+//        return new LocalValidatorFactoryBean();
+//    }
 }
