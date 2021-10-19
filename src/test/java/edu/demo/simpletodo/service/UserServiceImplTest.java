@@ -52,5 +52,19 @@ public class UserServiceImplTest
         assertEquals(expected, userFound);
     }
 
+    @Test
+    public void shouldCreateADuplicatedUser() throws Exception {
+        //given
+        Optional<User> userOptional = Optional.of(VALID_USER);
+        doReturn(userOptional).when(userRepository).findUserByUsername(VALID_USER.getUsername());
+        doReturn(true).when(userRepository).existsUserByUsername(VALID_USER.getUsername());
+
+        //when
+        userService.createUser(VALID_USER);
+
+        //then
+        assertEquals(userRepository.findUserByUsername(VALID_USER.getUsername()).get(), VALID_USER);
+    }
+
 
 }

@@ -37,16 +37,6 @@ public class UserController
     private MailSender mailSender;
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    /*@Autowired
-    public UserController(UserServiceImpl userService, UserRepository userRepo, TaskServiceImpl taskService, PasswordEncoder passwordEncoder, MailSender mailSender)
-    {
-        this.userService = userService;
-        this.taskService = taskService;
-        this.passwordEncoder = passwordEncoder;
-        this.mailSender = mailSender;
-        this.userRepo = userRepo;
-    }*/
-
     @GetMapping("/register")
     public String redirectToRegister(Model model)
     {
