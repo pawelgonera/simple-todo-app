@@ -2,6 +2,7 @@ package edu.demo.simpletodo.service;
 
 
 import edu.demo.simpletodo.config.ConfigBeans;
+import edu.demo.simpletodo.exception.UsernameIsAlreadyExistException;
 import edu.demo.simpletodo.model.User;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,6 +18,7 @@ import edu.demo.simpletodo.repository.UserRepository;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(SpringRunner.class)
@@ -53,17 +55,14 @@ public class UserServiceImplTest
     }
 
     @Test
-    public void shouldCreateADuplicatedUser() throws Exception {
+    public void shouldNotCreateADuplicatedUser() throws Exception {
         //given
         Optional<User> userOptional = Optional.of(VALID_USER);
         doReturn(userOptional).when(userRepository).findUserByUsername(VALID_USER.getUsername());
         doReturn(true).when(userRepository).existsUserByUsername(VALID_USER.getUsername());
 
         //when
-        userService.createUser(VALID_USER);
-
-        //then
-        assertEquals(userRepository.findUserByUsername(VALID_USER.getUsername()).get(), VALID_USER);
+        assertThrows(Exception.class, ()->userService.createUser(VALID_USER));
     }
 
 
