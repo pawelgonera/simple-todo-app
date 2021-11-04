@@ -39,6 +39,19 @@ public class UserServiceImpl implements UserService
         String messageInfo = "Successfully saved the user to the database";
         try
         {
+            if(isUsernameAlreadyExist(user.getUsername()))
+            {
+                String message = "This username is already exist!";
+                logger.error(message);
+                throw new UsernameIsAlreadyExistException(message);
+            }
+
+            if(isEmailAlreadyExist(user.getEmail()))
+            {
+                String message = "This email is already exist!";
+                logger.error(message);
+                throw new EmailIsAlreadyExistException(message);
+            }
             UserRole userRole = userRoleRepo.findByRole(DEFAULT_ROLE);
             user.getRoles().add(userRole);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
