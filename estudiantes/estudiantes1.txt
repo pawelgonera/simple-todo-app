@@ -1,3 +1,7 @@
 guille bazan
 Soreire
+<<<<<<< HEAD
+=======
+daniel fuentes
+>>>>>>> 5075b30d3f38e21d83dc42774e3fef3cbdeee42e
 
